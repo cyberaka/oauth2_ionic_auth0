@@ -1,47 +1,51 @@
-
 ion-toolbar {
-    --background: var(--ion-color-primary);
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    --border-color: var(--ion-color-primary);
+  --background: var(--ion-color-primary);
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  --border-color: var(--ion-color-primary);
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
 }
-.profile-container {
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #3a527c;
+    margin-top: 40px;
     text-align: center;
-    margin-top: 100px;
-}
-.loginCard {
-    ion-list {
-        margin: 10px;
-
-        ion-item {
-            padding: 5px;
-        }
-
-        ion-button {
-            margin: 5px;
-        }
-    }
-}
-
-.loading {
-    display: flex;
-    min-height: 500px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    .detail {
-      font-size: 20px;
-      font-weight: bold;
-      font-style: oblique;
-    }
   }
-  
+  ion-img {
+    margin-top: 32px;
+    height: 300px;
+    width: 300px;
+  }
+  ion-button {
+    margin-top: 50px;
+  }
+}
+.loading {
+  display: flex;
+  min-height: 500px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .detail {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: oblique;
+  }
+}
+
+

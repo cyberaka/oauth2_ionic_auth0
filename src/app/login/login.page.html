@@ -7,16 +7,17 @@
 </ion-header>
  -->
 <ion-content>
-  <div class="container">
-    <ng-container  *ngIf="(auth.isAuthenticated$ | async) === false">
-       <ion-button expand="block" (click)="login()">Login</ion-button>
-    </ng-container>
-    <div *ngIf="user$ | async as user" class="profile-container">
-     <h2>{{ user.name }}</h2>
-     <p>{{ user.email }}</p>
-   </div>
-    <ng-container *ngIf="auth.isAuthenticated$ | async">
-     <ion-button expand="block" (click)="logout()">logout</ion-button>
+  <div class="container"  *ngIf="(auth.isAuthenticated$ | async) === false">
+    <ng-container >
+      <div class="login">
+        <div class="title">Sample Auth0 Integration</div>
+        <ion-img src="./../../assets/logo.png" alt="home Logo"></ion-img>
+        <ion-button expand="block" (click)="login()">Login</ion-button>
+      </div>
     </ng-container>
   </div>
+  <ng-container class="container" *ngIf="loading" >
+    <ion-loading message="Loading..."  spinner="circles"></ion-loading>
+  </ng-container>
+ 
 </ion-content>

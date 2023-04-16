@@ -1,0 +1,58 @@
+<ion-content>
+  <div  *ngIf="auth.isAuthenticated$ | async"  class="profile-container">
+    <div *ngIf="user$ | async as user">
+     <ion-card color="light">
+      <div class="img-wrapper">
+        <img src="{{user.picture}}" />
+      </div>
+      <ion-card-content class="ion-text-center">
+        <h2>{{ user.name }}</h2>
+        <ion-text color="medium">
+          <div style="display: flex;align-items: center;" class="ion-justify-content-center">
+            <ion-icon name="mail-outline"></ion-icon>
+            <p>{{user.email}}</p>
+          </div>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+   </div>
+   <ion-segment value="token" style="width: 80%;" (ionChange)="segmentChange()">
+    <ion-segment-button value="token">
+      <ion-label>Auth0 Token</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="decodeToken">
+      <ion-label>Decode Token</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container [ngSwitch]="activeSegmentBtn" >
+   
+    <div *ngSwitchCase="'token'"  class="jsonFormatter">
+      <div class="ion-text-right">
+        <ion-button color="light" (click)="clipBoardCopy()">
+          <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <pre class="inlineText">
+        {{token}}
+      </pre>
+    </div>
+    <div *ngSwitchCase="'decodeToken'"  class="jsonFormatter">
+      <div class="ion-text-right">
+        <ion-button color="light" (click)="clipBoardCopy()">
+          <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <ng-container *ngFor="let item of decryptToken | keyvalue">
+        <div>
+          <b>{{item.key}}</b> :  {{item.value}}
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+    <ng-container>
+  
+     <ion-button expand="block" (click)="logout()">logout</ion-button>
+    </ng-container>
+  </div>
+  <ion-toast [isOpen]="isToastOpen" (didDismiss)="setOpen(false)" [message]="toastTxt" [duration]="5000"></ion-toast>
+</ion-content>

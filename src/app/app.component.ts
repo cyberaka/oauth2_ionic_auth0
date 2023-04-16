@@ -46,12 +46,30 @@ export class AppComponent implements OnInit  {
                 }
               });
           } else {
+            this.auth.isAuthenticated$.subscribe(c => {
+              if(!c) {
+                this.homeRedirect();
+              } else {
                 Browser.close().then(c => {
                   console.log(c);
                 });
-           
+              }
+            })
           }
         }
+      });
+    });
+  }
+
+  homeRedirect() {
+    this.ngZone.run(() => { 
+      this.router
+      .navigateByUrl('login', { replaceUrl: true }).then(c => {
+        Browser.close().then(c => {
+          console.log(c);
+        }).catch(e => {
+          console.log(e);
+        });
       });
     });
   }

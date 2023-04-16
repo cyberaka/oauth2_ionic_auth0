@@ -6,11 +6,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ScorePipe } from './score.pipe';
 import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 @NgModule({
-  declarations: [AppComponent, ScorePipe],
+  declarations: [AppComponent, ProfileViewComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(
