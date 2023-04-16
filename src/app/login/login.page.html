@@ -1,0 +1,22 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ -->
+<ion-content>
+  <div class="container">
+    <ng-container  *ngIf="(auth.isAuthenticated$ | async) === false">
+       <ion-button expand="block" (click)="login()">Login</ion-button>
+    </ng-container>
+    <div *ngIf="user$ | async as user" class="profile-container">
+     <h2>{{ user.name }}</h2>
+     <p>{{ user.email }}</p>
+   </div>
+    <ng-container *ngIf="auth.isAuthenticated$ | async">
+     <ion-button expand="block" (click)="logout()">logout</ion-button>
+    </ng-container>
+  </div>
+</ion-content>
