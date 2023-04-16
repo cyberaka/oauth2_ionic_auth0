@@ -9,7 +9,9 @@ Install [Node](https://nodejs.org/en)
 Install [Ionic](https://ionicframework.com/docs/cli)
 
 `prerequisite`
-
+```
+Node version v18.16+
+```
 
 ### Web
 
