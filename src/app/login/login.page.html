@@ -7,7 +7,7 @@
 </ion-header>
  -->
 <ion-content>
-  <div class="container"  *ngIf="(auth.isAuthenticated$ | async) === false">
+  <div class="container"  *ngIf="!loading">
     <ng-container >
       <div class="login">
         <div class="title">Sample Auth0 Integration</div>
