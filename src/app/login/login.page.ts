@@ -1,13 +1,10 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpService } from '../services/http.service';
-import { DialogService } from '../services/dialog.service';
-import { UtilsService } from '../services/utils.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { Capacitor } from '@capacitor/core';
 import { Browser } from '@capacitor/browser';
 import { switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 
 let window: any;
@@ -19,15 +16,26 @@ let window: any;
 export class LoginPage {
   pageTitle: string = 'Login';
   loading: boolean = true;
-  user$ = this.auth.isAuthenticated$.pipe(switchMap(() => this.auth.user$));
+
   isAuthenticated: boolean = false;
+ 
   constructor(
-    private router: Router,
-    private dialog: DialogService,
-    private http: HttpService,
-    private utils: UtilsService,
-    public auth: AuthService
-  ) {}
+    public auth: AuthService,
+    private router: Router
+  ) {
+    this.getDetails();
+  }
+
+  getDetails() {
+    this.auth.isAuthenticated$.subscribe((res) =>{
+      if(res) {
+        this.router.navigateByUrl('profile', {replaceUrl : true});
+      } else {
+        this.loading = false;
+        this.isAuthenticated = false;
+      }
+    });
+  }
 
 
 
@@ -47,32 +55,14 @@ export class LoginPage {
         .subscribe();
     } else {
       this.auth.loginWithRedirect().subscribe((c) => {
-        console.log('loginWithRedirect');
-        console.log(c);
+        this.auth.isAuthenticated$.subscribe((res) => {
+          if (res) {
+            alert(res);
+          }
+        });
       });
     }
   }
 
-  logout() {
-    let returnTo = environment.auth.authorizationParams.redirect_uri;
-    if (Capacitor.isNativePlatform()) { 
-      this.auth
-      .logout({ 
-        logoutParams: {
-          returnTo
-        },
-        async openUrl(url: string) {
-         await Browser.open({ url, windowName: '_self' })} 
-      })
-      .subscribe();
-    } else {
-      this.auth
-      .logout({ 
-        logoutParams: {
-          returnTo
-        },
-      }).subscribe();
-    }
-     
-  }
+ 
 }
