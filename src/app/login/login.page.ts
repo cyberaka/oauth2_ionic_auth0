@@ -17,7 +17,6 @@ export class LoginPage {
   pageTitle: string = 'Login';
   loading: boolean = true;
 
-  isAuthenticated: boolean = false;
  
   constructor(
     public auth: AuthService,
@@ -32,7 +31,6 @@ export class LoginPage {
         this.router.navigateByUrl('profile', {replaceUrl : true});
       } else {
         this.loading = false;
-        this.isAuthenticated = false;
       }
     });
   }
